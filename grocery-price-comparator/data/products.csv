@@ -1,0 +1,101 @@
+id,name,category,created_at
+1,Mango Juice 200ml,Beverages,2025-12-15 19:03:10.657
+2,Amul Milk 1L,Dairy,2026-01-30 19:03:10.657
+3,Coconut Oil 1L,Groceries,2025-04-22 19:03:10.657
+4,Coca Cola 600ml,Beverages,2026-02-08 19:03:10.657
+5,Mustard Oil 1L,Groceries,2025-06-04 19:03:10.657
+6,Pepsi 500ml,Beverages,2025-03-23 19:03:10.657
+7,Basmati Rice 5kg,Grains,2025-06-30 19:03:10.657
+8,Banana (Dozen),Fruits,2025-07-21 19:03:10.657
+9,Lays Classic Chips 80g,Snacks,2025-10-16 19:03:10.657
+10,Turmeric Powder 100g,Groceries,2025-11-04 19:03:10.657
+11,Kurkure Masala 90g,Snacks,2025-07-19 19:03:10.657
+12,Tomato 1kg,Vegetables,2026-03-01 19:03:10.657
+13,Toor Dal 1kg,Grains,2025-03-15 19:03:10.657
+14,Dove Soap 100g,Personal Care,2025-06-11 19:03:10.657
+15,Sugar 1kg,Groceries,2026-01-16 19:03:10.657
+16,Moong Dal 500g,Grains,2025-03-17 19:03:10.657
+17,Apple 1kg,Fruits,2025-05-06 19:03:10.657
+18,Onion 1kg,Vegetables,2025-04-25 19:03:10.657
+19,Potato 1kg,Vegetables,2025-12-30 19:03:10.657
+20,Parle-G Biscuits 800g,Snacks,2025-12-16 19:03:10.657
+21,Chana Dal 1kg,Grains,2026-01-27 19:03:10.657
+22,Mango 1kg,Fruits,2025-03-04 19:03:10.657
+23,Bingo Mad Angles 75g,Snacks,2025-07-06 19:03:10.657
+24,Oreo Cookies 300g,Snacks,2025-09-27 19:03:10.657
+25,Curd 500g,Dairy,2025-09-12 19:03:10.657
+26,Head & Shoulders Shampoo 340ml,Personal Care,2026-02-06 19:03:10.657
+27,Green Beans 500g,Vegetables,2025-05-29 19:03:10.657
+28,Butter Salted 100g,Dairy,2025-04-01 19:03:10.657
+29,Paneer 200g,Dairy,2025-10-21 19:03:10.657
+30,Bisleri Water 1L,Beverages,2025-08-10 19:03:10.657
+31,Carrot 1kg,Vegetables,2025-10-02 19:03:10.657
+32,Britannia Marie 300g,Snacks,2026-02-10 19:03:10.657
+33,Salt Iodized 1kg,Groceries,2025-04-15 19:03:10.657
+34,Eggs 12 Pack,Dairy,2025-04-18 19:03:10.657
+35,Wheat Flour 5kg,Grains,2026-02-11 19:03:10.657
+36,Good Day Cashew Biscuits 300g,Snacks,2025-04-19 19:03:10.657
+37,Amul Ghee 500ml,Dairy,2025-04-21 19:03:10.657
+38,Grapes 500g,Fruits,2025-09-23 19:03:10.657
+39,Minute Maid Orange 1L,Beverages,2026-02-09 19:03:10.657
+40,Uncle Chips Spicy 55g,Snacks,2025-04-10 19:03:10.657
+41,Yogurt 400g,Dairy,2025-11-10 19:03:10.657
+42,Red Chili Powder 100g,Groceries,2025-05-08 19:03:10.657
+43,Tropicana Apple 1L,Beverages,2026-03-02 19:03:10.657
+44,Haldiram Namkeen 400g,Snacks,2025-07-15 19:03:10.657
+45,Amul Cream 200ml,Dairy,2025-03-29 19:03:10.657
+46,Coriander Powder 100g,Groceries,2026-01-28 19:03:10.657
+47,Garam Masala 100g,Groceries,2025-06-09 19:03:10.657
+48,Watermelon (Piece),Fruits,2025-07-27 19:03:10.657
+49,Condensed Milk 400g,Dairy,2025-11-13 19:03:10.657
+50,Sona Masoori Rice 5kg,Grains,2025-09-24 19:03:10.657
+51,Orange 1kg,Fruits,2025-03-13 19:03:10.657
+52,Colgate Toothpaste 150g,Personal Care,2025-06-18 19:03:10.657
+53,Brinjal 500g,Vegetables,2025-09-24 19:03:10.657
+54,Cauliflower (piece),Vegetables,2026-02-14 19:03:10.657
+55,Bikaji Bhujia 400g,Snacks,2026-02-07 19:03:10.657
+56,Monaco Biscuits 300g,Snacks,2025-09-08 19:03:10.657
+57,7Up 750ml,Beverages,2025-10-02 19:03:10.657
+58,Maggi Noodles 4-pack,Snacks,2025-12-23 19:03:10.657
+59,Limca 600ml,Beverages,2025-09-02 19:03:10.657
+60,Dettol Handwash 250ml,Personal Care,2025-06-09 19:03:10.657
+61,Cabbage (piece),Vegetables,2025-10-24 19:03:10.657
+62,Spinach 500g,Vegetables,2025-05-05 19:03:10.657
+63,Vaseline Body Lotion 200ml,Personal Care,2025-08-10 19:03:10.657
+64,Sprite 1L,Beverages,2025-05-10 19:03:10.657
+65,Amul Flavored Milk 200ml,Dairy,2025-12-22 19:03:10.657
+66,Cucumber 500g,Vegetables,2026-01-11 19:03:10.657
+67,Pringles Original 110g,Snacks,2025-11-10 19:03:10.657
+68,Amul Lassi 200ml,Dairy,2025-07-15 19:03:10.657
+69,Capsicum 500g,Vegetables,2025-10-01 19:03:10.657
+70,Maida 1kg,Grains,2025-03-08 19:03:10.657
+71,Suji (Semolina) 500g,Grains,2026-01-23 19:03:10.657
+72,Pomegranate 500g,Fruits,2025-07-13 19:03:10.657
+73,Poha 1kg,Grains,2025-07-13 19:03:10.657
+74,Frooti 200ml,Beverages,2025-08-07 19:03:10.657
+75,Gillette Mach3 Razor,Personal Care,2025-10-20 19:03:10.657
+76,Ladyfinger 500g,Vegetables,2025-04-23 19:03:10.657
+77,Sunscreen SPF50 50ml,Personal Care,2025-09-06 19:03:10.657
+78,Oats 500g,Grains,2025-05-05 19:03:10.657
+79,Papaya 1kg,Fruits,2025-04-28 19:03:10.657
+80,Too Yumm Multigrain 60g,Snacks,2026-01-15 19:03:10.657
+81,Sunflower Oil 1L,Groceries,2025-06-02 19:03:10.657
+82,Yippee Noodles 4-pack,Snacks,2025-09-26 19:03:10.657
+83,Tops Tomato Ketchup 1kg,Snacks,2025-08-10 19:03:10.657
+84,Popcorn Butter Flavor 50g,Snacks,2025-09-17 19:03:10.657
+85,Corn Flour 500g,Grains,2025-08-07 19:03:10.657
+86,Cumin Seeds 100g,Groceries,2025-10-29 19:03:10.657
+87,Skimmed Milk 500ml,Dairy,2025-11-07 19:03:10.657
+88,Rusk Toasted 400g,Snacks,2025-03-15 19:03:10.657
+89,Besan 1kg,Grains,2025-06-08 19:03:10.657
+90,Rice Cakes Plain 100g,Snacks,2025-08-10 19:03:10.657
+91,Bitter Gourd 500g,Vegetables,2025-11-23 19:03:10.657
+92,Drumstick (Moringa) 500g,Vegetables,2025-09-08 19:03:10.657
+93,Black Pepper 50g,Groceries,2025-04-23 19:03:10.657
+94,Cheese Slices 200g,Dairy,2025-05-06 19:03:10.657
+95,Hide & Seek Biscuits 200g,Snacks,2025-08-17 19:03:10.657
+96,Real Cranberry Juice 1L,Beverages,2025-09-06 19:03:10.657
+97,Cardamom 50g,Groceries,2025-11-21 19:03:10.657
+98,Guava 500g,Fruits,2026-01-11 19:03:10.657
+99,Face Wash 100ml,Personal Care,2025-09-20 19:03:10.657
+100,Green Peas 500g,Vegetables,2025-12-26 19:03:10.657

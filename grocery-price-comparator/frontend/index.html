@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Price Comparator - Shop Smarter. Spend Less.</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 420px;
+            border-radius: 12px;
+        }
+
+        #api-status-bar {
+            display: none;
+            padding: 8px 16px;
+            background: #ffebee;
+            color: #c62828;
+            font-size: 0.85rem;
+            text-align: center;
+            border-bottom: 1px solid #ef9a9a;
+        }
+
+        #api-status-bar.connected {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="spinner-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- API Status Bar -->
+    <div id="api-status-bar"> Cannot connect to backend API at http://localhost:8000 -- make sure the FastAPI server is
+        running.</div>
+
+    <!-- SECTION 1: NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h1> Grocery Price Comparator</h1>
+            </div>
+            <div id="api-indicator" title="API Status"
+                style="font-size:0.78rem;padding:4px 10px;border-radius:20px;background:#fdd;color:#c00;display:flex;align-items:center;gap:4px;">
+                <span id="api-dot"></span> <span id="api-label">Connecting...</span>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="scrollToSection('hero')">Home</a></li>
+                <li><a href="#products" onclick="scrollToSection('products-section')">Products</a></li>
+                <li><a href="#search" onclick="scrollToSection('search-results')">Search</a></li>
+                <li><a href="#budget" onclick="scrollToSection('budget-section')">Budget Planner</a></li>
+                <li><a href="#ratings" onclick="scrollToSection('ratings-section')">Store Ratings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CATEGORY NAV BAR -->
+    <nav class="cat-navbar" id="catNavbar" aria-label="Product Categories">
+        <div class="cat-navbar-inner">
+            <div class="cat-rail-wrap">
+                <div class="cat-rail" id="categoryRail">
+                    <!-- Pills inserted by categories.js -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 2: HERO -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h2>Shop Smarter. Spend Less.</h2>
+            <p>Compare grocery prices across all stores near you instantly.</p>
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search product (e.g., Milk, Rice, Tomato...)"
+                    autocomplete="off"
+                >
+                <button id="searchBtn" class="btn btn-primary">Compare Prices</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PRODUCTS BROWSER -->
+    <section id="products-section" class="products-section">
+        <div class="container">
+            <div class="products-header">
+                <div>
+                    <h2>Browse Products</h2>
+                    <p class="products-subtitle">Showing <strong id="productCount"></strong> products
+                        <span id="activeCatLabel"></span>
+                    </p>
+                </div>
+                <div class="products-search-wrap">
+                    <input
+                        type="text"
+                        id="productSearchBox"
+                        class="products-search-input"
+                        placeholder=" Search within category ¦"
+                        oninput="filterProductsBySearch(this.value)"
+                    >
+                </div>
+            </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Cards rendered by categories.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: SEARCH RESULTS -->
+    <section id="search-results" class="search-results hidden">
+        <div class="container">
+            <div class="results-summary" id="resultsSummary"></div>
+
+            <div class="results-controls">
+                <button class="sort-btn" onclick="sortResults('price', this)">Sort by Price</button>
+                <button class="sort-btn" onclick="sortResults('distance', this)">Sort by Distance</button>
+                <button class="sort-btn" onclick="sortResults('rating', this)">Sort by Rating</button>
+            </div>
+
+            <div class="results-table-wrapper">
+                <table class="results-table" id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Store Name</th>
+                            <th>Price</th>
+                            <th>Distance</th>
+                            <th>Stock Status</th>
+                            <th>Rating</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody"></tbody>
+                </table>
+            </div>
+
+            <div class="chart-container">
+                <h3>Price History (Last 30 Days)</h3>
+                <canvas id="priceChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: NEARBY STORES MAP -->
+    <section id="stores-section" class="stores-section">
+        <div class="container">
+            <h2>Nearby Stores</h2>
+            <div class="map-wrapper">
+                <div id="map" class="map"></div>
+                <div class="stores-sidebar" id="storesSidebar"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: BUDGET PLANNER -->
+    <section id="budget-section" class="budget-section">
+        <div class="container">
+            <h2>Budget Planner</h2>
+
+            <div class="budget-setup">
+                <label for="budgetInput">Set my budget:</label>
+                <div class="budget-input-group">
+                    <span class="currency">₹</span>
+                    <input type="number" id="budgetInput" placeholder="Enter budget amount" min="0" step="100">
+                    <button id="setBudgetBtn" class="btn btn-primary">Set Budget</button>
+                </div>
+            </div>
+
+            <div class="budget-status" id="budgetStatus" style="display: none;">
+                <div class="budget-summary">
+                    <div class="budget-item">
+                        <span class="label">Total Items:</span>
+                        <span class="value" id="totalItems">0</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="label">Total Cost:</span>
+                        <span class="value" id="totalCost">₹0.00</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="label">Budget:</span>
+                        <span class="value" id="budgetAmount">₹0.00</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="label">Remaining:</span>
+                        <span class="value" id="remainingBudget">₹0.00</span>
+                    </div>
+                </div>
+
+                <div class="budget-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText"></span>
+                </div>
+
+                <div class="shopping-list">
+                    <h3>Shopping List</h3>
+                    <div class="shopping-list-table-wrapper">
+                        <table class="shopping-list-table" id="shoppingListTable">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Store</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shoppingListBody"></tbody>
+                        </table>
+                    </div>
+                    <button id="exportBudgetBtn" class="btn btn-secondary" style="margin-top: 15px;">
+                         Export Shopping List (CSV)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: STORE RATINGS -->
+    <section id="ratings-section" class="ratings-section">
+        <div class="container">
+            <h2>Store Ratings & Reviews</h2>
+
+            <div class="ratings-filters">
+                <button class="filter-btn active" onclick="filterStores('all', this)">All Stores</button>
+                <button class="filter-btn" onclick="filterStores('top', this)">Top Rated</button>
+                <button class="filter-btn" onclick="filterStores('nearby', this)">Nearby</button>
+            </div>
+
+            <div class="stores-grid" id="storesGrid"></div>
+        </div>
+    </section>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeReviewModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeReviewModal()">X</button>
+            <h3 id="modalStoreTitle">Write a Review</h3>
+
+            <form id="reviewForm" onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <label for="reviewerName">Your Name:</label>
+                    <input type="text" id="reviewerName" required placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="starRating">Rating:</label>
+                    <div class="star-selector" id="starSelector">
+                        <span class="star" onclick="selectStar(1)">&#9733;</span>
+                        <span class="star" onclick="selectStar(2)">&#9733;</span>
+                        <span class="star" onclick="selectStar(3)">&#9733;</span>
+                        <span class="star" onclick="selectStar(4)">&#9733;</span>
+                        <span class="star" onclick="selectStar(5)">&#9733;</span>
+                    </div>
+                    <span id="selectedRating">Select rating</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewText">Review:</label>
+                    <textarea id="reviewText" required placeholder="Share your experience (minimum 10 characters)"
+                        rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SECTION 7: FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Grocery Price Comparator</h4>
+                <p>Shop Smarter. Spend Less.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#search-results">Search</a></li>
+                    <li><a href="#budget-section">Budget</a></li>
+                    <li><a href="#ratings-section">Ratings</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Tech Stack</h4>
+                <p>Built with FastAPI + Python</p>
+                <p>Frontend: HTML5, CSS3, Vanilla JS</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Grocery Price Comparator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/budget.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/ratings.js"></script>
+</body>
+
+</html>

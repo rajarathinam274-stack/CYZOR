@@ -1,0 +1,6 @@
+store_id,store_name,address,latitude,longitude,phone,opening_hours
+1,FreshMart,"12 Anna Salai, Chennai",13.0827,80.2707,044-23456789,8AM-10PM
+2,QuickGrocer,"45 T Nagar, Chennai",13.0418,80.2341,044-23456790,7AM-11PM
+3,ValueBasket,"78 Velachery Main Rd, Chennai",12.975,80.22,044-23456791,8AM-9PM
+4,CityMart,"23 Adyar, Chennai",13.0012,80.2565,044-23456792,9AM-10PM
+5,DailyFresh,"56 Porur, Chennai",13.035,80.157,044-23456793,7AM-10PM
